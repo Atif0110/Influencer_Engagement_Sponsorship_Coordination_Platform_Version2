@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #4CAF50;
+        }
+        .campaign {
+            margin-bottom: 30px;
+        }
+        .campaign h2 {
+            font-size: 20px;
+            color: #007BFF;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .campaign p {
+            margin: 5px 0;
+        }
+        .ads {
+            margin-top: 10px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .ads th, .ads td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        .ads th {
+            background-color: #f2f2f2;
+        }
+        .ads tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Monthly Report for {{ name }}</h1>
+            <p>Here's a summary of your campaigns and ad requests for this month.</p>
+        </div>
+        {% for campaign in campaign_details %}
+        <div class="campaign">
+            <h2>Campaign: {{ campaign.name }}</h2>
+            <p><strong>Description:</strong> {{ campaign.description }}</p>
+            <p><strong>Budget:</strong> ${{ campaign.budget }}</p>
+            <p><strong>Visibility:</strong> {{ campaign.visibility }}</p>
+            <h3>Ad Requests:</h3>
+            <table class="ads">
+                <thead>
+                    <tr>
+                        <th>Influencer</th>
+                        <th>Requirements</th>
+                        <th>Message</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ad in campaign.ads %}
+                    <tr>
+                        <td>{{ ad.influencer }}</td>
+                        <td>{{ ad.requirements }}</td>
+                        <td>{{ ad.message }}</td>
+                        <td>${{ ad.payment_amount }}</td>
+                        <td>{{ ad.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
