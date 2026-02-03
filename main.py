@@ -5,6 +5,7 @@ from backend.models import db
 from backend.worker import celery
 from backend.task import *
 from datetime import timedelta
+from flask_caching import Cache
 import os
 
 app = Flask(__name__)
@@ -37,3 +38,4 @@ def home():
 if __name__ == '__main__':
     db.create_all()
     app.run()
+
