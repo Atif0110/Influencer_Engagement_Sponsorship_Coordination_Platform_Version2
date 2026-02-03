@@ -29,6 +29,8 @@ app.config["CACHE_DEFAULT_TIMEOUT"] = 600
 jwt = JWTManager(app)
 db.init_app(app)
 
+app.app_context().push()
+
 from backend.api import *
 
 @app.route('/')
