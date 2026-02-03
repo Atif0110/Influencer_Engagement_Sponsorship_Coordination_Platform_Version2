@@ -21,7 +21,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=12)
 
-# Redis Cache (use Render Redis URL)
+# Redis Cache
 app.config["CACHE_TYPE"] = "redis"
 app.config["CACHE_REDIS_URL"] = os.environ.get("REDIS_URL")
 app.config["CACHE_DEFAULT_TIMEOUT"] = 600
@@ -36,6 +36,6 @@ def home():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    db.create_all()
+    with app.app_context():
+        db.create_all()
     app.run()
-
